@@ -56,6 +56,9 @@ public class MainActivity extends Activity {
     private TextView mTextView;
     private IntervalCountDownTimer r2;
 
+    private Button buttonStart;
+    private ImageView iv;
+
     public MainActivity() {
         this.ACTIVITYCODE_TIMER = NOTIFICATION_ID;
         this.ACTIVITYCODE_PAUSE = 2;
@@ -103,8 +106,10 @@ public class MainActivity extends Activity {
                 vRepeatCountOnOff = (TextView) findViewById(R.id.repeat_onoff);
                 viewStartTimer = findViewById(R.id.timercontrol_start);
                 viewStoptimer = findViewById(R.id.timercontrol_stop);
-                ((Button) findViewById(R.id.button_start)).setOnClickListener(new startTimer());
-                ((ImageView) findViewById(R.id.button_stop)).setOnClickListener(new resetTimer());
+                buttonStart = (Button) findViewById(R.id.button_start);
+                buttonStart.setOnClickListener(new startTimer());
+                iv = (ImageView) findViewById(R.id.button_stop);
+                iv.setOnClickListener(new resetTimer());
                 buttonPauseResume = (Button) findViewById(R.id.button_pause_resume);
                 buttonPauseResume.setOnClickListener(new pauseResumeTimer());
                 vMainCounter.setOnClickListener(new runningTimer());
@@ -249,7 +254,6 @@ public class MainActivity extends Activity {
         }
     }
 
-    /* renamed from: wearablesoftware.wearintervaltimer.MainActivity.5 */
     class editPauseCounter implements View.OnClickListener {
         editPauseCounter() {
         }
@@ -446,12 +450,12 @@ public class MainActivity extends Activity {
             MainActivity.vRepeatCountOnOff.setText(this.repeatCountEnabled ? R.string.option_on : R.string.option_off);
             MainActivity.vRepeatCountOnOff.setBackgroundColor(MainActivity.this.getResources().getColor(this.repeatCountEnabled ? R.color.option_on_background : R.color.option_off_background));
             if (this.running) {
-                MainActivity.viewStartTimer.setVisibility(View.VISIBLE);
-                MainActivity.viewStoptimer.setVisibility(View.INVISIBLE);
+                MainActivity.viewStartTimer.setVisibility(View.INVISIBLE);
+                MainActivity.viewStoptimer.setVisibility(View.VISIBLE);
                 return;
             }
-            MainActivity.viewStartTimer.setVisibility(View.INVISIBLE);
-            MainActivity.viewStoptimer.setVisibility(View.VISIBLE);
+            MainActivity.viewStartTimer.setVisibility(View.VISIBLE);
+            MainActivity.viewStoptimer.setVisibility(View.INVISIBLE);
         }
 
         public void pause() {
