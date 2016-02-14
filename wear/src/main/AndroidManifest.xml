@@ -3,11 +3,13 @@
     package="com.example.ponomarev.sportweartimer2">
 
     <uses-feature android:name="android.hardware.type.watch" />
+
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault">
@@ -20,6 +22,30 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <uses-library
+            android:name="com.google.android.wearable"
+            android:required="false" />
+
+        <activity
+            android:label="@string/app_name"
+            android:name="com.example.ponomarev.sportweartimer2.ConfigureTimerActivity"
+            android:parentActivityName="com.example.ponomarev.sportweartimer2.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.ponomarev.sportweartimer2.MainActivity" />
+
+        </activity>
+
+        <activity
+            android:label="@string/app_name"
+            android:name="com.example.ponomarev.sportweartimer2.ConfigureRepeatActivity"
+            android:parentActivityName="com.example.ponomarev.sportweartimer2.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.ponomarev.sportweartimer2.MainActivity" />
+        </activity>
+
     </application>
 
 </manifest>

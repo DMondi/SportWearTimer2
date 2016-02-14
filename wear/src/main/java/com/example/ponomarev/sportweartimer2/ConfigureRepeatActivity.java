@@ -15,7 +15,6 @@ import android.widget.TextView;
 public class ConfigureRepeatActivity extends Activity {
     private long repeatCount;
     private TextView vRepeatCount;
-    private TextView vRepeatCountLabel;
 
 
     class onOkClick implements OnClickListener {
@@ -62,7 +61,6 @@ public class ConfigureRepeatActivity extends Activity {
         setContentView(R.layout.activity_configurerepeat);
         this.repeatCount = getIntent().getLongExtra("repeatCount", 0);
         this.vRepeatCount = (TextView) findViewById(R.id.repeatCount);
-        this.vRepeatCountLabel = (TextView) findViewById(R.id.label_repeatCount);
         findViewById(R.id.repeatCount_up).setOnClickListener(new RepeatCountModifier(true, Long.valueOf(99)));
         findViewById(R.id.repeatCount_down).setOnClickListener(new RepeatCountModifier(false, Long.valueOf(99)));
         findViewById(R.id.button_ok).setOnClickListener(new onOkClick());
@@ -73,8 +71,7 @@ public class ConfigureRepeatActivity extends Activity {
         if (this.repeatCount >= 0) {
             this.vRepeatCount.setText(String.format("%2d", new Object[]{Long.valueOf(this.repeatCount)}));
         } else {
-            this.vRepeatCount.setText("\u221e");
+            this.vRepeatCount.setText("\u221e"); //знак бесконечности
         }
-        this.vRepeatCountLabel.setText(getResources().getQuantityText(R.plurals.settings_repeat, (int) this.repeatCount));
     }
 }

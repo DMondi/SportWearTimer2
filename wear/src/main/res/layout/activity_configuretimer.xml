@@ -32,9 +32,10 @@
                         android:textStyle="bold"
                         android:textColor="@color/text"
                         android:id="@+id/timer_hours_up"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="+" />
+                        android:text="@string/symbol_plus"
+                        android:gravity="center_horizontal" />
 
                     <TextView
                         android:textSize="30sp"
@@ -46,17 +47,17 @@
                         android:paddingRight="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="00" />
+                        android:text="@string/symbol_00" />
 
                     <TextView
                         android:textSize="30sp"
                         android:textStyle="bold"
                         android:textColor="@color/text"
                         android:id="@+id/timer_hours_down"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="-"
-                        android:gravity="center_vertical" />
+                        android:text="@string/symbol_minus"
+                        android:gravity="center_horizontal" />
             </LinearLayout>
 
             <LinearLayout
@@ -73,7 +74,7 @@
                     android:layout_gravity="left"
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
-                    android:text=":" />
+                    android:text="@string/symbol_dots" />
             </LinearLayout>
 
             <LinearLayout
@@ -87,9 +88,10 @@
                     android:textStyle="bold"
                     android:textColor="@color/text"
                     android:id="@+id/timer_minutes_up"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="+" />
+                    android:text="@string/symbol_plus"
+                    android:gravity="center_horizontal" />
                 <TextView
                     android:textSize="30sp"
                     android:textColor="@color/timer_text"
@@ -100,17 +102,17 @@
                     android:paddingRight="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="00" />
+                    android:text="@string/symbol_00" />
 
                 <TextView
                     android:textSize="30sp"
                     android:textStyle="bold"
                     android:textColor="@color/text"
-                    android:gravity="left"
                     android:id="@+id/timer_minutes_down"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="-" />
+                    android:text="@string/symbol_minus"
+                    android:gravity="center_horizontal" />
             </LinearLayout>
 
             <LinearLayout
@@ -127,7 +129,7 @@
                     android:layout_gravity="left"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=":" />
+                    android:text="@string/symbol_dots" />
             </LinearLayout>
 
             <LinearLayout
@@ -140,11 +142,11 @@
                     android:textSize="30sp"
                     android:textStyle="bold"
                     android:textColor="@color/text"
-                    android:gravity="left"
+                    android:gravity="center_horizontal"
                     android:id="@+id/timer_seconds_up"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="+" />
+                    android:text="@string/symbol_plus" />
                 <TextView
                     android:textSize="30sp"
                     android:textColor="@color/timer_text"
@@ -156,17 +158,17 @@
                     android:paddingRight="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="00" />
+                    android:text="@string/symbol_00" />
 
                 <TextView
                     android:textSize="30sp"
                     android:textStyle="bold"
                     android:textColor="@color/text"
-                    android:gravity="left"
                     android:id="@+id/timer_seconds_down"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="-" />
+                    android:text="@string/symbol_minus"
+                    android:gravity="center_horizontal" />
             </LinearLayout>
         </LinearLayout>
 

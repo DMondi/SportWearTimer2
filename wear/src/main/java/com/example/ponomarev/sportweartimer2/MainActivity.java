@@ -1,26 +1,18 @@
 package com.example.ponomarev.sportweartimer2;
 
 import android.app.Activity;
-import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.support.wearable.view.WatchViewStub;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.app.Notification.Action;
-import android.app.Notification.Builder;
-import android.app.Notification.WearableExtender;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.res.Resources;
-import android.graphics.BitmapFactory;
-import android.graphics.BitmapFactory.Options;
-import android.os.CountDownTimer;
 import android.widget.Toast;
 
 import java.util.concurrent.TimeUnit;
@@ -31,7 +23,6 @@ public class MainActivity extends Activity {
     private static final int NOTIFICATION_ID = 1;
     private static Button buttonPauseResume;
     private static IntervalCountDownTimer timer;
-    private static boolean useNotification;
     private static TextView vMainCounter;
     private static TextView vPauseCounter;
     private static TextView vPauseOnOff;
@@ -39,42 +30,37 @@ public class MainActivity extends Activity {
     private static TextView vRepeatCountOnOff;
     private static View viewStartTimer;
     private static View viewStoptimer;
-    private final int ACTIVITYCODE_PAUSE;
-    private final int ACTIVITYCODE_REPEAT;
-    private final int ACTIVITYCODE_TIMER;
-    private final String PREF_MILLIS_TO_FUTURE;
-    private final String PREF_MILLIS_TO_PAUSE;
-    private final String PREF_MILLIS_TO_PAUSE_ENABLED;
-    private final String PREF_REPEAT_COUNT;
-    private final String PREF_REPEAT_COUNT_ENABLED;
+    //private final int ACTIVITYCODE_PAUSE;
+    //private final int ACTIVITYCODE_REPEAT;
+    //private final int ACTIVITYCODE_TIMER;
+    //private final String PREF_MILLIS_TO_FUTURE;
+    //private final String PREF_MILLIS_TO_PAUSE;
+    //private final String PREF_MILLIS_TO_PAUSE_ENABLED;
+    //private final String PREF_REPEAT_COUNT;
+    //private final String PREF_REPEAT_COUNT_ENABLED;
     private final long[] VIBRATION_FINISHED;
     private final long[] VIBRATION_MAINTIMER;
     private final long[] VIBRATION_PAUSETIMER;
     private SharedPreferences settings;
     private Vibrator vibrator;
 
-    private TextView mTextView;
     private IntervalCountDownTimer r2;
 
     private Button buttonStart;
     private ImageView iv;
 
     public MainActivity() {
-        this.ACTIVITYCODE_TIMER = NOTIFICATION_ID;
-        this.ACTIVITYCODE_PAUSE = 2;
-        this.ACTIVITYCODE_REPEAT = 3;
-        this.VIBRATION_FINISHED = new long[]{0, 1000};
+        //this.ACTIVITYCODE_TIMER = NOTIFICATION_ID;
+        //this.ACTIVITYCODE_PAUSE = 2;
+        //this.ACTIVITYCODE_REPEAT = 3;
+        this.VIBRATION_FINISHED = new long[]{0, 1000, 100, 100};
         this.VIBRATION_MAINTIMER = new long[]{0, 500};
-        this.VIBRATION_PAUSETIMER = new long[]{0, 500, 500, 500, 500};
-        this.PREF_MILLIS_TO_FUTURE = "millisToFuture";
-        this.PREF_MILLIS_TO_PAUSE = "millisToPause";
-        this.PREF_REPEAT_COUNT = "repeatCount";
-        this.PREF_MILLIS_TO_PAUSE_ENABLED = "millisToPauseEnabled";
-        this.PREF_REPEAT_COUNT_ENABLED = "repeatCountEnabled";
-    }
-
-    static {
-        useNotification = false;
+        this.VIBRATION_PAUSETIMER = new long[]{0, 300, 200, 300, 200};
+        //this.PREF_MILLIS_TO_FUTURE = "millisToFuture";
+        //this.PREF_MILLIS_TO_PAUSE = "millisToPause";
+        //this.PREF_REPEAT_COUNT = "repeatCount";
+        //this.PREF_MILLIS_TO_PAUSE_ENABLED = "millisToPauseEnabled";
+        //this.PREF_REPEAT_COUNT_ENABLED = "repeatCountEnabled";
     }
 
     @Override
@@ -98,7 +84,6 @@ public class MainActivity extends Activity {
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
-                mTextView = (TextView) stub.findViewById(R.id.counter_main);
                 vMainCounter = (TextView) findViewById(R.id.counter_main);
                 vPauseCounter = (TextView) findViewById(R.id.counter_pause);
                 vPauseOnOff = (TextView) findViewById(R.id.pause_onoff);
@@ -124,12 +109,10 @@ public class MainActivity extends Activity {
 
     protected void onStart() {
         super.onStart();
-        useNotification = false;
     }
 
     protected void onStop() {
         super.onStop();
-        useNotification = true;
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -173,26 +156,9 @@ public class MainActivity extends Activity {
         return 1000 * ((((hours * 60) * 60) + (60 * minutes)) + seconds);
     }
 
-    private void showNotification(String title, String text, long[] vibrationSequence) {
+    private void showNotification(String title, long[] vibrationSequence) {
         this.vibrator.vibrate(vibrationSequence, -1);
-        if (useNotification) {
-            Intent showTimerOperation = new Intent(this, MainActivity.class);
-            showTimerOperation.addFlags(268435456);
-            PendingIntent showTimerIntent = PendingIntent.getActivity(this, 0, showTimerOperation, 0);
-            Options options = new Options();
-            options.inScaled = true;
-            ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE))
-                    .notify(NOTIFICATION_ID, new Builder(this)
-                            .setContentTitle(title)
-                            .setContentText(text)
-                            .setSmallIcon(R.drawable.ic_launcher)
-                            .setLocalOnly(true)
-                            .setPriority(Notification.PRIORITY_DEFAULT)
-                            .setVibrate(new long[]{0, 50})
-                            .extend(new WearableExtender().setBackground(BitmapFactory.decodeResource(getResources(), R.drawable.background, options))
-                                    .addAction(new Action(R.drawable.action_show_timer, getString(R.string.action_show_timer), showTimerIntent)))
-                            .build());
-        }
+        Toast.makeText(MainActivity.this, title, Toast.LENGTH_SHORT).show();
     }
 
     class startTimer implements View.OnClickListener {
@@ -216,7 +182,6 @@ public class MainActivity extends Activity {
         public void onClick(View v) {
             if (MainActivity.timer.isRunning()) {
                 MainActivity.timer.reset();
-                ((NotificationManager) MainActivity.this.getSystemService(Context.NOTIFICATION_SERVICE)).cancel(MainActivity.NOTIFICATION_ID);
                 MainActivity.timer.updateGui();
             }
         }
@@ -238,8 +203,7 @@ public class MainActivity extends Activity {
         }
     }
 
-    /* renamed from: wearablesoftware.wearintervaltimer.MainActivity.4 */
-    class runningTimer implements View.OnClickListener {
+     class runningTimer implements View.OnClickListener {
         runningTimer() {
         }
 
@@ -269,7 +233,6 @@ public class MainActivity extends Activity {
         }
     }
 
-    /* renamed from: wearablesoftware.wearintervaltimer.MainActivity.6 */
     class clickPauseOnOff implements View.OnClickListener {
         clickPauseOnOff() {
         }
@@ -280,7 +243,6 @@ public class MainActivity extends Activity {
         }
     }
 
-    /* renamed from: wearablesoftware.wearintervaltimer.MainActivity.7 */
     class clickRepeatCount implements View.OnClickListener {
         clickRepeatCount() {
         }
@@ -339,7 +301,7 @@ public class MainActivity extends Activity {
                 IntervalCountDownTimer.this.currentMillisInFuture = IntervalCountDownTimer.this.millisInFuture;
                 if (!IntervalCountDownTimer.this.repeatCountEnabled || (IntervalCountDownTimer.this.currentRepeatCount <= 0 && IntervalCountDownTimer.this.currentRepeatCount != -1)) {
                     IntervalCountDownTimer.this.running = false;
-                    MainActivity.this.showNotification(res.getText(R.string.n_title).toString(), res.getText(R.string.n_text_finished).toString(), MainActivity.this.VIBRATION_FINISHED);
+                    MainActivity.this.showNotification(res.getText(R.string.n_text_finished).toString(), MainActivity.this.VIBRATION_FINISHED);
                 } else {
                     String notificationText;
                     if (IntervalCountDownTimer.this.currentRepeatCount > 0) {
@@ -361,7 +323,7 @@ public class MainActivity extends Activity {
                         objArr[0] = Long.valueOf(IntervalCountDownTimer.this.currentRepeatCount + 1);
                         notificationText = res.getQuantityString(R.plurals.n_text, access$500, objArr);
                     }
-                    MainActivity.this.showNotification(res.getText(R.string.n_title).toString(), notificationText, MainActivity.this.VIBRATION_MAINTIMER);
+                    MainActivity.this.showNotification(notificationText, MainActivity.this.VIBRATION_MAINTIMER);
                 }
                 IntervalCountDownTimer.this.updateGui();
             }
@@ -383,7 +345,7 @@ public class MainActivity extends Activity {
                 IntervalCountDownTimer.this.currentMillisToPause = IntervalCountDownTimer.this.millisToPause;
                 IntervalCountDownTimer.this.pauseTimerIsRunning = false;
                 Resources res = MainActivity.this.getResources();
-                MainActivity.this.showNotification(res.getText(R.string.n_title).toString(), res.getText(R.string.n_text_pause_finished).toString(), MainActivity.this.VIBRATION_PAUSETIMER);
+                MainActivity.this.showNotification(res.getText(R.string.n_text_pause_finished).toString(), MainActivity.this.VIBRATION_PAUSETIMER);
                 IntervalCountDownTimer.this.mainTimer = IntervalCountDownTimer.this.getNewMainTimer(IntervalCountDownTimer.this.millisInFuture);
                 IntervalCountDownTimer.this.mainTimer.start();
                 IntervalCountDownTimer.this.updateGui();
@@ -431,8 +393,8 @@ public class MainActivity extends Activity {
                 msPauseCounter = this.millisToPause;
                 repeatsLeft = this.repeatCount;
             }
-            MainActivity.vMainCounter.setText(String.format("%02d:%02d:%02d", new Object[]{Long.valueOf(MainActivity.getHours(msMainCounter)), Long.valueOf(MainActivity.getMinutes(msMainCounter)), Long.valueOf(MainActivity.getSeconds(msMainCounter))}));
-            MainActivity.vPauseCounter.setText(String.format("%02d:%02d:%02d", new Object[]{Long.valueOf(MainActivity.getHours(msPauseCounter)), Long.valueOf(MainActivity.getMinutes(msPauseCounter)), Long.valueOf(MainActivity.getSeconds(msPauseCounter))}));
+            MainActivity.vMainCounter.setText(String.format(MainActivity.this.getResources().getString(R.string.fullTimeFormatString), new Object[]{Long.valueOf(MainActivity.getHours(msMainCounter)), Long.valueOf(MainActivity.getMinutes(msMainCounter)), Long.valueOf(MainActivity.getSeconds(msMainCounter))}));
+            MainActivity.vPauseCounter.setText(String.format(MainActivity.this.getResources().getString(R.string.fullTimeFormatString), new Object[]{Long.valueOf(MainActivity.getHours(msPauseCounter)), Long.valueOf(MainActivity.getMinutes(msPauseCounter)), Long.valueOf(MainActivity.getSeconds(msPauseCounter))}));
             MainActivity.vPauseCounter.setTextColor(MainActivity.this.getResources().getColor(this.millisToPauseEnable ? R.color.timer_text : R.color.timer_text_inactive));
             if (this.repeatCount >= 0) {
                 TextView access$2100 = MainActivity.vRepeatCount;
@@ -450,12 +412,12 @@ public class MainActivity extends Activity {
             MainActivity.vRepeatCountOnOff.setText(this.repeatCountEnabled ? R.string.option_on : R.string.option_off);
             MainActivity.vRepeatCountOnOff.setBackgroundColor(MainActivity.this.getResources().getColor(this.repeatCountEnabled ? R.color.option_on_background : R.color.option_off_background));
             if (this.running) {
-                MainActivity.viewStartTimer.setVisibility(View.INVISIBLE);
+                MainActivity.viewStartTimer.setVisibility(View.GONE);
                 MainActivity.viewStoptimer.setVisibility(View.VISIBLE);
                 return;
             }
             MainActivity.viewStartTimer.setVisibility(View.VISIBLE);
-            MainActivity.viewStoptimer.setVisibility(View.INVISIBLE);
+            MainActivity.viewStoptimer.setVisibility(View.GONE);
         }
 
         public void pause() {

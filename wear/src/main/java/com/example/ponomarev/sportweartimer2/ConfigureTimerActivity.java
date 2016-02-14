@@ -9,9 +9,14 @@ import android.view.View.OnClickListener;
 
 
 /**
- * Created by Dim on 14.02.2016.
+ * Created by Dim on 10.02.2016 at 13:28.
  */
 public class ConfigureTimerActivity extends Activity {
+
+    private static final int MAX_HOURS_VALUE = 99;
+    private static final int MAX_MINUTES_VALUE = 59;
+    private static final int MAX_SECOND_VALUE = 59;
+
     private long hours;
     private long minutes;
     private long seconds;
@@ -19,7 +24,6 @@ public class ConfigureTimerActivity extends Activity {
     private TextView timer_minutes;
     private TextView timer_seconds;
 
-    /* renamed from: wearablesoftware.wearintervaltimer.ConfigureTimerActivity.1 */
     class onOkClick implements OnClickListener {
         onOkClick() {
         }
@@ -92,6 +96,8 @@ public class ConfigureTimerActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuretimer);
+
+
         long millis = getIntent().getLongExtra("millis", 0);
         this.hours = MainActivity.getHours(millis);
         this.minutes = MainActivity.getMinutes(millis);
@@ -99,20 +105,22 @@ public class ConfigureTimerActivity extends Activity {
         this.timer_hours = (TextView) findViewById(R.id.timer_hours);
         this.timer_minutes = (TextView) findViewById(R.id.timer_minutes);
         this.timer_seconds = (TextView) findViewById(R.id.timer_seconds);
-        findViewById(R.id.timer_hours_up).setOnClickListener(new TimerModifier(1, true, Long.valueOf(99)));
-        findViewById(R.id.timer_hours_down).setOnClickListener(new TimerModifier(1, false, Long.valueOf(99)));
-        findViewById(R.id.timer_minutes_up).setOnClickListener(new TimerModifier(2, true, Long.valueOf(59)));
-        findViewById(R.id.timer_minutes_down).setOnClickListener(new TimerModifier(2, false, Long.valueOf(59)));
-        findViewById(R.id.timer_seconds_up).setOnClickListener(new TimerModifier(3, true, Long.valueOf(59)));
-        findViewById(R.id.timer_seconds_down).setOnClickListener(new TimerModifier(3, false, Long.valueOf(59)));
+
+
+        findViewById(R.id.timer_hours_up).setOnClickListener(new TimerModifier(TimerModifier.TIME_PART_HOUR, true, Long.valueOf(MAX_HOURS_VALUE)));
+        findViewById(R.id.timer_hours_down).setOnClickListener(new TimerModifier(TimerModifier.TIME_PART_HOUR, false, Long.valueOf(MAX_HOURS_VALUE)));
+        findViewById(R.id.timer_minutes_up).setOnClickListener(new TimerModifier(TimerModifier.TIME_PART_MINUTE, true, Long.valueOf(MAX_MINUTES_VALUE)));
+        findViewById(R.id.timer_minutes_down).setOnClickListener(new TimerModifier(TimerModifier.TIME_PART_MINUTE, false, Long.valueOf(MAX_MINUTES_VALUE)));
+        findViewById(R.id.timer_seconds_up).setOnClickListener(new TimerModifier(TimerModifier.TIME_PART_SECOND, true, Long.valueOf(MAX_SECOND_VALUE)));
+        findViewById(R.id.timer_seconds_down).setOnClickListener(new TimerModifier(TimerModifier.TIME_PART_SECOND, false, Long.valueOf(MAX_SECOND_VALUE)));
         findViewById(R.id.button_ok).setOnClickListener(new onOkClick());
         updateTimerParts();
     }
 
     private void updateTimerParts() {
-        this.timer_hours.setText(String.format("%02d", new Object[]{Long.valueOf(this.hours)}));
-        this.timer_minutes.setText(String.format("%02d", new Object[]{Long.valueOf(this.minutes)}));
-        this.timer_seconds.setText(String.format("%02d", new Object[]{Long.valueOf(this.seconds)}));
+        this.timer_hours.setText(String.format(getString(R.string.timeFormatString), new Object[]{Long.valueOf(this.hours)}));
+        this.timer_minutes.setText(String.format(getString(R.string.timeFormatString), new Object[]{Long.valueOf(this.minutes)}));
+        this.timer_seconds.setText(String.format(getString(R.string.timeFormatString), new Object[]{Long.valueOf(this.seconds)}));
     }
 }
 

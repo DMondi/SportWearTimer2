@@ -1,22 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <color name="background">#ff333333</color>
-        <color name="black">#ff000000</color>
-        <color name="blue">#ff2878ff</color>
+        <color name="background">#64333333</color>
+        <color name="black">#f0000000</color>
+        <color name="blue">#2878ff</color>
         <color name="button_background">#ff555555</color>
         <color name="button_background_pressed">#ff757575</color>
         <color name="card_default_background">#ffe2e2e2</color>
-        <color name="common_action_bar_splitter">#ffd2d2d2</color>
-        <color name="common_signin_btn_dark_text_default">@android:color/white</color>
-        <color name="common_signin_btn_dark_text_disabled">#ffaaaaaa</color>
-        <color name="common_signin_btn_dark_text_focused">@android:color/white</color>
-        <color name="common_signin_btn_dark_text_pressed">@android:color/white</color>
-        <color name="common_signin_btn_default_background">#ffdd4b39</color>
-        <color name="common_signin_btn_light_text_default">#ff737373</color>
-        <color name="common_signin_btn_light_text_disabled">#ffaaaaaa</color>
-        <color name="common_signin_btn_light_text_focused">#ff737373</color>
-        <color name="common_signin_btn_light_text_pressed">@android:color/white</color>
-        <color name="dark_blue">#ff2955c5</color>
+        <color name="dark_blue">#2955c5</color>
         <color name="dark_grey">#ff424242</color>
         <color name="disabled_text_light">#ffe0e0e0</color>
         <color name="dismiss_close">#ffff5151</color>
@@ -36,7 +26,7 @@
         <color name="text">#ffffffff</color>
         <color name="timer_background">#ff111111</color>
         <color name="timer_text">#ffffffff</color>
-        <color name="timer_text_inactive">#ff555555</color>
+        <color name="timer_text_inactive">#555555</color>
         <color name="timer_text_pressed">#ff757575</color>
         <color name="white">#ffffffff</color>
 </resources>
