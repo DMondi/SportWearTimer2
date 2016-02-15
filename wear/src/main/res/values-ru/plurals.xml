@@ -2,7 +2,7 @@
 <resources>
     <plurals name="label_repeat">
         <item quantity="other">%d раз</item>
-        <item quantity="one">%d раз</item>
+        <item quantity="two">%d раза</item>
     </plurals>
     <plurals name="n_text">
         <item quantity="other">Круг пройден. %s повторов осталось.</item>
@@ -10,6 +10,6 @@
     </plurals>
     <plurals name="settings_repeat">
         <item quantity="other">раз</item>
-        <item quantity="one">раз</item>
+        <item quantity="two">раза</item>
     </plurals>
 </resources>

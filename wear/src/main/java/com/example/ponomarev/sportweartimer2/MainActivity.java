@@ -30,14 +30,6 @@ public class MainActivity extends Activity {
     private static TextView vRepeatCountOnOff;
     private static View viewStartTimer;
     private static View viewStoptimer;
-    //private final int ACTIVITYCODE_PAUSE;
-    //private final int ACTIVITYCODE_REPEAT;
-    //private final int ACTIVITYCODE_TIMER;
-    //private final String PREF_MILLIS_TO_FUTURE;
-    //private final String PREF_MILLIS_TO_PAUSE;
-    //private final String PREF_MILLIS_TO_PAUSE_ENABLED;
-    //private final String PREF_REPEAT_COUNT;
-    //private final String PREF_REPEAT_COUNT_ENABLED;
     private final long[] VIBRATION_FINISHED;
     private final long[] VIBRATION_MAINTIMER;
     private final long[] VIBRATION_PAUSETIMER;
@@ -50,17 +42,9 @@ public class MainActivity extends Activity {
     private ImageView iv;
 
     public MainActivity() {
-        //this.ACTIVITYCODE_TIMER = NOTIFICATION_ID;
-        //this.ACTIVITYCODE_PAUSE = 2;
-        //this.ACTIVITYCODE_REPEAT = 3;
         this.VIBRATION_FINISHED = new long[]{0, 1000, 100, 100};
         this.VIBRATION_MAINTIMER = new long[]{0, 500};
         this.VIBRATION_PAUSETIMER = new long[]{0, 300, 200, 300, 200};
-        //this.PREF_MILLIS_TO_FUTURE = "millisToFuture";
-        //this.PREF_MILLIS_TO_PAUSE = "millisToPause";
-        //this.PREF_REPEAT_COUNT = "repeatCount";
-        //this.PREF_MILLIS_TO_PAUSE_ENABLED = "millisToPauseEnabled";
-        //this.PREF_REPEAT_COUNT_ENABLED = "repeatCountEnabled";
     }
 
     @Override
